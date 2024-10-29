@@ -1,0 +1,19 @@
+on:
+  pull_request:
+    types: [opened, synchronize]
+ 
+jobs:
+  check_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check source and target branches
+        env:
+          TARGET_BRANCH: ${{ github.event.pull_request.base.ref }}
+          SOURCE_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          if [[ "$TARGET_BRANCH" == "master" && "$SOURCE_BRANCH" != "prod" ]]; then
+            echo "Error: Pull requests to 'master' can only come from the 'prod' branch."
+            exit 1
+          else
+            echo "Branch rules met."
+          fi
