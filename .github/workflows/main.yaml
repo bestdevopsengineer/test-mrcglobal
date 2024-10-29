@@ -6,7 +6,7 @@ jobs:
   check_branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Check source and target branches
+      - name: Check source and target branches qa
         env:
           TARGET_BRANCH: ${{ github.event.pull_request.base.ref }}
           SOURCE_BRANCH: ${{ github.event.pull_request.head.ref }}
